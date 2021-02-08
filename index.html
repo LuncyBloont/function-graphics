@@ -156,8 +156,8 @@ textarea {
     <div class="ui" style="background: #cecece; padding: 0cm; border: #454545 0.02cm solid; width: 10cm; top: 300px; left: 30px;">
         <button>functions</button><br />
         <textarea id="codes" style="width: 90%; height: 3cm;" placeholder="e.g. y = 3 * x + 4 #458945 @">
-y = 0.67 * x - 1 #ff9045 @
-y = (x * x - 6) / 2  #44f  @
+y = 0.67 * x - 1 #ff9045 @ <
+y = (x * x - 6) / 2  #44f  @ >
 y = 2 - Math.sqrt(4 - Math.pow(x - 5, 2)) #00ac34
 y = 2 + Math.sqrt(4 - Math.pow(x - 5, 2)) #00ac34 @
 y = Math.log(x * x) #920 
@@ -198,7 +198,8 @@ function update_data() {
         var f = codes[i].substring(0, codes[i].indexOf("#") < 0 ? codes[i].length : codes[i].indexOf("#"));
         var c = codes[i].indexOf("#") < 0 ? undefined : codes[i].substring(codes[i].indexOf("#"), codes[i].indexOf("@") < 0 ? codes[i].length : codes[i].indexOf("@"));
         var l = codes[i].indexOf("@") >= 0;
-        funcs[ii] = [f, c, l];
+        var lg = codes[i].indexOf(">") >= 0 ? 1 : (codes[i].indexOf("<") >= 0 ? -1 : 0);
+        funcs[ii] = [f, c, l, lg];
         ii += 1;
     }
     

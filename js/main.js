@@ -7,6 +7,7 @@ var unit_point = 2;
 var msg = "";
 
 var x = 0, y = 0;
+var oldy = 0;
 
 var funcs = [];
 
@@ -90,15 +91,18 @@ function update() {
     for (var i = 0; i < funcs.length; i++) {
         var f = funcs[i][0];
         var c = (funcs[i][1] && funcs[i][2]) ? funcs[i][1] : "#acacac";
-        y = 0;
+        y = center_y;
+        oldy = center_y;
         drawIt(f, c, funcs, i);
     }
 }
 
+
+
 function drawIt(f, c, fs, thisi) {
     var first = true;
     var pxl = gunit / unitSize;
-    ctx.beginPath();
+    
     var suc = true;
     for (var xx = 0; xx < canvas.width; xx++) {
         x = (xx - center_x) / unitSize * gunit;
@@ -143,23 +147,41 @@ function drawIt(f, c, fs, thisi) {
             y = realy;
             x = realx;
         } catch {
-            y = 0;
+            y = center_y;
             suc = false;
         }
         
 
         ctx.strokeStyle = c;
-        if (first) {
+        /*if (first) {
             first = false;
             ctx.moveTo(xx, yy);
         } else {
             ctx.lineTo(xx, yy);
         }
-
-        if (yy >= canvas.height || yy < 0) {
-            first = true;
+        */
+        if (xx > 0 && (yy < canvas.height && yy >= 0) || (oldy < canvas.height && oldy >= 0)) {
+            ctx.beginPath();
+            ctx.moveTo(xx - 1, oldy);
+            ctx.lineTo(xx, yy);
+            ctx.stroke();
+            oldy = yy;
+            if (fs[thisi][3] == 1) {
+                ctx.globalAlpha = 0.1;
+                ctx.beginPath();
+                ctx.moveTo(xx, yy - canvas.height / 4);
+                ctx.lineTo(xx, yy);
+                ctx.stroke();
+            }
+            if (fs[thisi][3] == -1) {
+                ctx.globalAlpha = 0.1;
+                ctx.beginPath();
+                ctx.moveTo(xx, yy + canvas.height / 4);
+                ctx.lineTo(xx, yy);
+                ctx.stroke();
+            }
+            ctx.globalAlpha = 1;
         }
     }
-    ctx.stroke();
     msg += "function (" + thisi + ") " + (suc ? "DONE" : "ERROR") + "\n";
 }
