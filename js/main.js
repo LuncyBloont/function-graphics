@@ -5,6 +5,7 @@ var gunit = 1;
 var unitSize = 36;
 var unit_point = 2;
 var msg = "";
+var area_size = 0;
 
 var x = 0, y = 0;
 var oldy = 0;
@@ -18,6 +19,8 @@ function start() {
 }
 
 function ToString(n, p) {
+    var ox = Math.pow(10, p);
+    n = Math.round(parseFloat(n) * ox) / ox;
     n = n + "";
     if (n.indexOf(".") < 0) {
         n += ".";
@@ -165,18 +168,23 @@ function drawIt(f, c, fs, thisi) {
             ctx.moveTo(xx - 1, oldy);
             ctx.lineTo(xx, yy);
             ctx.stroke();
+            var rectrate = Math.atan2(yy - oldy, 1) - Math.PI / 2;
             oldy = yy;
             if (fs[thisi][3] == 1) {
-                ctx.globalAlpha = 0.1;
+                ctx.globalAlpha = 0.3;
                 ctx.beginPath();
-                ctx.moveTo(xx, yy - canvas.height / 4);
+                var rand = Math.random();
+                ctx.moveTo(xx + area_size * rand * Math.cos(rectrate),
+                        yy + area_size * rand * Math.sin(rectrate));
                 ctx.lineTo(xx, yy);
                 ctx.stroke();
             }
             if (fs[thisi][3] == -1) {
-                ctx.globalAlpha = 0.1;
+                ctx.globalAlpha = 0.3;
                 ctx.beginPath();
-                ctx.moveTo(xx, yy + canvas.height / 4);
+                var rand = Math.random();
+                ctx.moveTo(xx - area_size * rand * Math.cos(rectrate), 
+                        yy - area_size * rand * Math.sin(rectrate));
                 ctx.lineTo(xx, yy);
                 ctx.stroke();
             }

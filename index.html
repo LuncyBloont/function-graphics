@@ -147,21 +147,26 @@ textarea {
     <div class="ui tool-panel" style="background: #cecece; left: 30px; top: 30px;">
         <button>🛠 option </button><br />
         <pre>
-·grid unit      &#9;<input id="grid_unit" type="number" value="1.0"/> <br />
+·grid unit      &#9;<input id="grid_unit" type="number" value="1.000"/> <br />
 ·center x       &#9;<input id="center_x" type="number" value="300"/> <br />
 ·center y       &#9;<input id="center_y" type="number" value="600"/> <br />
 ·unit size (px) &#9;<input id="unit_size" type="number" value="36"/> <br />
+·area size      &#9;<input id="area_size" type="number" value="12"/> <br />
         </pre>
     </div>
     <div class="ui" style="background: #cecece; padding: 0cm; border: #454545 0.02cm solid; width: 10cm; top: 300px; left: 30px;">
         <button>functions</button><br />
         <textarea id="codes" style="width: 90%; height: 3cm;" placeholder="e.g. y = 3 * x + 4 #458945 @">
-y = 0.67 * x - 1 #ff9045 @ <
-y = (x * x - 6) / 2  #44f  @ >
+y = 0.67 * x - 1 #ff9045 @ LT
+y = (x * x - 6) / 2  #44f  @ GT
 y = 2 - Math.sqrt(4 - Math.pow(x - 5, 2)) #00ac34
 y = 2 + Math.sqrt(4 - Math.pow(x - 5, 2)) #00ac34 @
 y = Math.log(x * x) #920 
 y = Math.sqrt(100 - x * x) #ff0000 @
+y = -x + 3 #f0f @
+y = (x - 4) * 0xffffffff #ff0 @
+y = (x > -5 && x <= 3) ? (Math.sin(x) / 3 - 1) : NaN #ff0f56 @ LT
+
 </textarea>
         <div><textarea rows="12" style="width: 90%; background: #565656; color: #cecece; overflow: auto;" id="graph_log"></textarea></div>
     </div>
@@ -174,6 +179,7 @@ function update_data() {
     center_y = parseInt($$("center_y").value) || 0;
     gunit = parseFloat($$("grid_unit").value) || 1;
     unitSize = parseInt($$("unit_size").value) || 36;
+    area_size = parseInt($$("area_size").value) || 12;
 
     var s = $$("grid_unit").value + "";
     var ppp = -2;
@@ -198,7 +204,8 @@ function update_data() {
         var f = codes[i].substring(0, codes[i].indexOf("#") < 0 ? codes[i].length : codes[i].indexOf("#"));
         var c = codes[i].indexOf("#") < 0 ? undefined : codes[i].substring(codes[i].indexOf("#"), codes[i].indexOf("@") < 0 ? codes[i].length : codes[i].indexOf("@"));
         var l = codes[i].indexOf("@") >= 0;
-        var lg = codes[i].indexOf(">") >= 0 ? 1 : (codes[i].indexOf("<") >= 0 ? -1 : 0);
+        var lg = codes[i].indexOf("GT") >= 0 || codes[i].indexOf("gt") >= 0 ? 
+                1 : (codes[i].indexOf("LT") >= 0 || codes[i].indexOf("lt") >= 0 ? -1 : 0);
         funcs[ii] = [f, c, l, lg];
         ii += 1;
     }
@@ -230,7 +237,7 @@ load_ui();
 
 start();
 
-setInterval("status_message()", 100);
+setInterval("status_message()", 30);
 
 update_data();
 
