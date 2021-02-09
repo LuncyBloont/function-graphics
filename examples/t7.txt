@@ -1,0 +1,5 @@
+y = 3/2 - 1/2 * x #f0f @
+y = +Math.sqrt(4 - Math.pow(x - 2, 2)) #40f @
+y = -Math.sqrt(4 - Math.pow(x - 2, 2)) #40f @
+b = 0, NaN
+y = 2 * x + b #f00 @

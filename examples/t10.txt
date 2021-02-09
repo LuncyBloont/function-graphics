@@ -1,0 +1,6 @@
+g2 = Math.sqrt(2), NaN
+
+y = g2 * Math.sin(x + Math.PI / 6) #f9f @ 
+// y = g2 * Math.sin(x * 2 + Math.PI / 6) #00b @
+// y = g2 * Math.sin((x - Math.PI / 6) * 2 + Math.PI / 6) #000 @
+ 

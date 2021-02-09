@@ -163,7 +163,7 @@ function drawIt(f, c, fs, thisi) {
             ctx.lineTo(xx, yy);
         }
         */
-        if (xx > 0 && (yy < canvas.height && yy >= 0) || (oldy < canvas.height && oldy >= 0)) {
+        if (xx >= 0) {
             ctx.beginPath();
             ctx.moveTo(xx - 1, oldy);
             ctx.lineTo(xx, yy);

@@ -1,0 +1,7 @@
+p = 2, NaN;
+y = +Math.sqrt(2 * x * p) #fb0 @
+y = -Math.sqrt(2 * x * p) #bf0 @
+y = (x + p / 2) * 0xffffffff 
+y = 2 * (x - p / 2) #0f0 @
+y = Math.abs(x - -4) < 0.05 ? x + 4 : NaN #f0f @
+y = -1/2 * (x + 4) #0ff @

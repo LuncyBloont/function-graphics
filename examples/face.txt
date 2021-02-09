@@ -1,0 +1,13 @@
+
+cx = 1, cy = 3, cw = 1.3, ch = 1.2, NaN
+y = cy + Math.sqrt(4 - Math.pow((x - cx) / cw, 2)) * ch || (x > cx - cw * 2.01 && x < cx + cw * 2.01 ? cy : NaN) #f50 @ LT
+y = cy - Math.sqrt(4 - Math.pow((x - cx) / cw, 2)) * ch || (x > cx - cw * 2.01 && x < cx + cw * 2.01 ? cy : NaN) #f50 @ GT
+
+y = (x > -1.3 * cw + cx && x < -0.45 * cw + cx) || (x > 0.78 * cw + cx && x < 1.67 * cw + cx) ? Math.sin((x - cx) * 3 / cw - 2.1) * ch + cy : NaN #232323 @
+
+y = x > -1 * cw + cx && x < 1.6 * cw + cx ? Math.pow((x - cx) * 0.6 / cw, 2) * ch + cy - 1.5 : NaN #ac2323 @
+
+y = x #232323 @ LT
+y = x > -7 ? -x - 3 : NaN #000 @ LT
+y = x <= -7 ? x + 11 : NaN #000 @ LT
+y = -x - 12 #000 @ LT

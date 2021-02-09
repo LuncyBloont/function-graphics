@@ -188,7 +188,8 @@ y = (x * x - 6) / 2  #44f  @ GT
 y = 2 - Math.sqrt(4 - Math.pow(x - 5, 2)) #00ac34
 y = 2 + Math.sqrt(4 - Math.pow(x - 5, 2)) #00ac34 @
 y = Math.log(x * x) #920 
-y = Math.sqrt(100 - x * x) #ff0000 @
+lb = -7, NaN
+y = x < lb || x > -lb ? Math.sqrt(100 - x * x) : NaN #ff0000 @
 y = -x + 3 #f0f @
 y = (x - 4) * 0xffffffff #ff0 @
 y = (x > -5 && x <= 3) ? (Math.sin(x) / 3 - 1) : NaN #ff0f56 @ LT
