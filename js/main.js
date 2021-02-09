@@ -79,7 +79,7 @@ function update() {
         ctx.moveTo(center_x, yy);
         ctx.lineTo(center_x + 5, yy);
         ctx.stroke();
-        ctx.fillText(ToString(i * gunit, unit_point), center_x + unitSize / 2, yy);
+        ctx.fillText(ToString(-i * gunit, unit_point), center_x + unitSize / 2, yy);
     }
     for (var i = -1; ; i--) {
         var yy = i * unitSize + center_y;
@@ -88,7 +88,7 @@ function update() {
         ctx.moveTo(center_x, yy);
         ctx.lineTo(center_x + 5, yy);
         ctx.stroke();
-        ctx.fillText(ToString(i * gunit, unit_point), center_x + unitSize / 2, yy);
+        ctx.fillText(ToString(-i * gunit, unit_point), center_x + unitSize / 2, yy);
     }
 
     for (var i = 0; i < funcs.length; i++) {
