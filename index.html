@@ -40,11 +40,19 @@ function load_ui() {
             mobj.style.top = (parseInt(event.clientY - mobj.data_mouse_position_y) || 0) + "px";
         }
     }
-    document.body.ontouchmove = document.body.onmousemove;
+    document.body.ontouchmove = function(e) {
+        var event = e || event || window.event;
+        event.preventDefault();
+        document.body.onmousemove(event);
+    }
     document.body.onmouseup = function(e) {
         window.ui_moving_obj = undefined;
     }
-    document.body.ontouchend = document.body.onmouseup;
+    document.body.ontouchend = function(e) {
+        var event = e || event || window.event;
+        event.preventDefault();
+        document.body.onmouseup(event);
+    }
     for (var i = 0; i < uis.length; i++) {
         var obj = uis[i];
         obj.onmousemove = function(e) {
@@ -66,7 +74,11 @@ function load_ui() {
             this.style.zIndex = window.ui_max_z_index + 1;
             window.ui_max_z_index += 1
         };
-        obj.ontouchstart = obj.onmousedown;
+        obj.ontouchstart = function(e) {
+            var event = e || event || window.event;
+            event.preventDefault();
+            this.onmousedown(event);
+        }
         obj.onmouseup = function(e) {
             var event = e || event || window.event;
             var ox = event.clientX - eval((this.style.left + "").substring(0,  (this.style.left + "").length - 2));
@@ -77,7 +89,11 @@ function load_ui() {
             }
             this.status_mouse_down = false;
         }
-        obj.ontouchend = obj.onmouseup;
+        obj.ontouchend = function(e) {
+            var event = e || event || window.event;
+            event.preventDefault();
+            this.onmouseup(event);
+        }
         obj.onchange = function() {
             setTimeout("update_data()", 500);
         }
