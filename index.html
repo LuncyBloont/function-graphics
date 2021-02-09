@@ -44,17 +44,15 @@ function load_ui() {
         window.ui_moving_obj = undefined;
     }
 
-    document.body.ontouchstart = function(e) {
+    $$("cvs").ontouchstart = function(e) {
         var event = e || event || window.event;
-        var mobj = window.ui_moving_obj;
-        console.log(mobj);
+        var mobj = window.ui_touch_obj;
         if (mobj) {
             mobj.style.left = (parseInt(event.touches[0].clientX - mobj.data_mouse_position_x) || 0) + "px";
             mobj.style.top = (parseInt(event.touches[0].clientY - mobj.data_mouse_position_y) || 0) + "px";
-            window.ui_moving_obj = undefined;
+            window.ui_touch_obj = undefined;
         }
     }
-    document.body.ontouchstart_back = document.body.ontouchstart;
 
     for (var i = 0; i < uis.length; i++) {
         var obj = uis[i];
@@ -97,10 +95,9 @@ function load_ui() {
             if (oy > title_height) {
                 return;
             }
-            window.ui_moving_obj = this;
-            document.body.ontouchstart = function() {
-                document.body.ontouchstart = document.body.ontouchstart_back;
-            }
+            window.ui_touch_obj = this;
+            this.style.zIndex = window.ui_max_z_index + 1;
+            window.ui_max_z_index += 1
         }
 
         obj.onchange = function() {
