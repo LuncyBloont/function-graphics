@@ -188,14 +188,14 @@ textarea {
         <textarea id="codes" style="width: 90%; height: 3cm;" placeholder="e.g. y = 3 * x + 4 #458945 @">
 y = 0.67 * x - 1 #ff9045 @ LT
 y = (x * x - 6) / 2  #44f  @ GT
-y = 2 - Math.sqrt(4 - Math.pow(x - 5, 2)) #00ac34
-y = 2 + Math.sqrt(4 - Math.pow(x - 5, 2)) #00ac34 @
-y = Math.log(x * x) #920 
+y = 2 - sqrt(4 - pow(x - 5, 2)) #00ac34
+y = 2 + sqrt(4 - pow(x - 5, 2)) #00ac34 @
+y = log(x * x) #920 
 lb = -7, NaN
-y = x < lb || x > -lb ? Math.sqrt(100 - x * x) : NaN #ff0000 @
+y = x < lb || x > -lb ? sqrt(100 - x * x) : NaN #ff0000 @
 y = -x + 3 #f0f @
 y = (x - 4) * 0xffffffff #ff0 @
-y = (x > -5 && x <= 3) ? (Math.sin(x) / 3 - 1) : NaN #ff0f56 @ LT
+y = (x > -5 && x <= 3) ? (sin(x) / 3 - 1) : NaN #ff0f56 @ LT
 
 </textarea>
         <div><textarea rows="12" style="width: 90%; background: #565656; color: #cecece; overflow: auto;" id="graph_log"></textarea></div>
@@ -241,6 +241,19 @@ function update_data() {
     }
     
     update();
+}
+
+for (let f in Object.getOwnPropertyDescriptors(Math))
+{
+    window[f] = Math[f];
+}
+
+window['mix'] = function(a, b, f) {
+    return a * f + b * (1.0 - f);
+}
+
+window['clamp'] = function(a, m0, m1) {
+    return a < m0 ? m0 : a > m1 ? m1 : a;
 }
 
 new function() {

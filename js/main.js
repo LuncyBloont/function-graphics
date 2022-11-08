@@ -102,7 +102,7 @@ function update() {
 
 
 
-function drawIt(f, c, fs, thisi) {
+function drawIt(_f, _c, _fs, thisi) {
     var first = true;
     var pxl = gunit / unitSize;
     
@@ -112,20 +112,20 @@ function drawIt(f, c, fs, thisi) {
         var yy = 0;
         
         try {
-            var realy = eval(f);
+            var realy = eval(_f);
             yy = center_y - (realy / gunit * unitSize);
             try {
-                for (var i = thisi; i < fs.length; i++) {
-                    if (i != thisi && fs[thisi][2] && fs[i][2]) {
+                for (var i = thisi; i < _fs.length; i++) {
+                    if (i != thisi && _fs[thisi][2] && _fs[i][2]) {
                         var realx = x;
                         var x1 = x;
                         var x2 = x + pxl;
                         x = x1;
-                        var cy1 = eval(f);
-                        var dy1 = eval(fs[i][0]);
+                        var cy1 = eval(_f);
+                        var dy1 = eval(_fs[i][0]);
                         x = x2;
-                        var cy2 = eval(f);
-                        var dy2 = eval(fs[i][0]);
+                        var cy2 = eval(_f);
+                        var dy2 = eval(_fs[i][0]);
 
                         var aa1 = (cy1 - cy2) / (x1 - x2);
                         var bb1 = cy1 - aa1 * x1;
@@ -155,7 +155,7 @@ function drawIt(f, c, fs, thisi) {
         }
         
 
-        ctx.strokeStyle = c;
+        ctx.strokeStyle = _c;
         /*if (first) {
             first = false;
             ctx.moveTo(xx, yy);
@@ -170,7 +170,7 @@ function drawIt(f, c, fs, thisi) {
             ctx.stroke();
             var rectrate = Math.atan2(yy - oldy, 1) - Math.PI / 2;
             oldy = yy;
-            if (fs[thisi][3] == 1) {
+            if (_fs[thisi][3] == 1) {
                 ctx.globalAlpha = 0.3;
                 ctx.beginPath();
                 var rand = Math.random();
@@ -179,7 +179,7 @@ function drawIt(f, c, fs, thisi) {
                 ctx.lineTo(xx, yy);
                 ctx.stroke();
             }
-            if (fs[thisi][3] == -1) {
+            if (_fs[thisi][3] == -1) {
                 ctx.globalAlpha = 0.3;
                 ctx.beginPath();
                 var rand = Math.random();
