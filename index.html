@@ -249,7 +249,7 @@ for (let f in Object.getOwnPropertyDescriptors(Math))
 }
 
 window['mix'] = function(a, b, f) {
-    return a * f + b * (1.0 - f);
+    return a * (1.0 - f) + b * f;
 }
 
 window['clamp'] = function(a, m0, m1) {
