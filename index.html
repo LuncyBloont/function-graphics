@@ -256,6 +256,10 @@ window['clamp'] = function(a, m0, m1) {
     return a < m0 ? m0 : a > m1 ? m1 : a;
 }
 
+window['fract'] = function(a) {
+    return a - Math.floor(a);
+}
+
 new function() {
     var cvs = $$("cvs");
     cvs.width = window.innerWidth * 0.9;
