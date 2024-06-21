@@ -260,6 +260,12 @@ window['fract'] = function(a) {
     return a - Math.floor(a);
 }
 
+window['smooth'] = function(l, r, a) {
+    let t = clamp(a, l, r);
+    t = (t - l) / (r - l);
+    return 3.0 * t * t - 2.0 * t * t * t;
+}
+
 new function() {
     var cvs = $$("cvs");
     cvs.width = window.innerWidth * 0.9;
